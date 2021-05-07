@@ -1,4 +1,5 @@
 # InfoInterface
+Added line##############
 1. Create account on GitHub.
 2. Download git on your local pc from https://git-scm.com/download/win
 3. Install Git. After installation make sure to mark "Launch Git Bash" checkbox before clicking "Finish" button. 
