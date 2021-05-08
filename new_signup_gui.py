@@ -23,14 +23,18 @@ def taken_in_credentials():
     password = pass_tbox.get()
     # length_of_password = len(password)
 
-    obj = signup_class.signup()
+    obj = signup_class.Signup()
     repeat_username = obj.check_username_repeatation(userid)
-    password_stop = obj.check_password_length(password)
+    password_stop = obj.check_password(password)[0]
+    password_weak = obj.check_password(password)[1]
 
     if repeat_username is False and password_stop is False:
-        obj.store_username_passid(userid, password)
-        messagebox.showinfo("Information", "Credentials added successfully")
-        button['state'] = DISABLED
+        if password_weak:
+            messagebox.showwarning("Warning", "Password is weak . Doesn't contain any special character.")
+        else:
+            obj.store_username_passid(userid, password)
+            messagebox.showinfo("Information", "Credentials added successfully")
+            button['state'] = DISABLED
 
     if repeat_username:
         # username_output = Label(root, text="Username already present. Please enter a new username.", fg='red')
@@ -38,6 +42,8 @@ def taken_in_credentials():
 
     if password_stop:
         messagebox.showerror("Error", "Password length less than 5. Please add a longer password.")
+
+
 
 
 text_shown = Text(root, height=5, width=15, bg="light cyan", fg="magenta")
