@@ -7,12 +7,13 @@ root = Tk()
 processor_name_entry = Entry(root, width=30, borderwidth=6)
 processor_frequency_entry = Entry(root, width=30, borderwidth=6)
 ram_entry = Entry(root, width=30, borderwidth=6)
-
+storage_type = Entry(root, width=30, borderwidth=6)
 ques = Entry(root, width=30, borderwidth=6)
 
 mylabel = Label(root, text="Processor Name:")
 mylabel1 = Label(root, text="base speed of processor")
 mylabel2 = Label(root, text="Enter RAM(in GB)")
+mylabel5 = Label(root, text="Enter the type of storage (SSD/HDD)")
 queslabel = Label(root, text="Ext graphic card in your PC (Y/N)")
 vram = 0
 gpu = ""
@@ -33,17 +34,17 @@ def afterQuestion():
 
         vram_entry = Entry(top, width=30, borderwidth=6)
 
-        storage_type = Entry(top, width=30, borderwidth=6)
+        #storage_type = Entry(top, width=30, borderwidth=6)
 
         mylabel3 = Label(top, text="Enter ur GPU's full name")
         myLabel4 = Label(top, text="Enter the VRAM your GPU has :")
-        mylabel5 = Label(top, text="Enter the type of storage (SSD/HDD)")
+        #mylabel5 = Label(top, text="Enter the type of storage (SSD/HDD)")
         vram_entry.grid(row=2, column=1)
         gpu_name.grid(row=1, column=1)
-        storage_type.grid(row=3, column=1)
+        # storage_type.grid(row=3, column=1)
         mylabel3.grid(row=1, column=0)
         myLabel4.grid(row=2, column=0)
-        mylabel5.grid(row=3, column=0)
+        # mylabel5.grid(row=3, column=0)
 
         def data():
             pro_name = processor_name_entry.get()
@@ -87,16 +88,21 @@ def afterQuestion():
         opt2 = ""
         def new_window():
             opt2 = Q2.get()
-            if opt2 == "y" or opt2 == "Y":
-                root.destroy()
-                #top1.destroy()
-                import Games_Teir
-
-            elif opt2 == 'n' or opt2 == "n":
-                quit()
-
-            else:
-                messagebox.showwarning("Wrong Key", "Enter either Y or N.")
+            pro_name = processor_name_entry.get()
+            pro_freq = processor_frequency_entry.get()
+            ram = ram_entry.get()
+            storage_meth = storage_type.get()
+            if pro_name == "" or str(pro_freq) == "" or str(ram) == "" or storage_meth == "":
+                messagebox.showwarning("Empty", "Please fill in empty entries")
+            elif pro_name != "" or str(pro_freq) != "" or str(ram) != "" or storage_meth != "":
+                messagebox.showwarning("Warning!!!!!", " do you  want to continue without an external gpu?!(Y/N)")
+                if opt2 == "Y" or opt2 == "y":
+                    root.destroy()
+                    import Games_Teir
+                elif opt2 == "N" or opt2 == "n":
+                    quit()
+                else:
+                    messagebox.showwarning("Wrong Key", "Enter either Y or N.")
 
 
         button = Button(top1, text="Continue", command=new_window)
@@ -111,14 +117,15 @@ def afterQuestion():
 processor_name_entry.grid(row=0, column=1)
 processor_frequency_entry.grid(row=1, column=1)
 ram_entry.grid(row=2, column=1)
-
-ques.grid(row=3, column=1)
+storage_type.grid(row=3, column=1)
+ques.grid(row=4, column=1)
 
 mylabel.grid(row=0, column=0)
 mylabel1.grid(row=1, column=0)
 mylabel2.grid(row=2, column=0)
+mylabel5.grid(row=3, column=0)
 
-queslabel.grid(row=3, column=0)
+queslabel.grid(row=4, column=0)
 # print(ram, pro_name, vram, gpu, )
 
 
